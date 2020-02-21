@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_012715) do
+ActiveRecord::Schema.define(version: 2020_02_21_030400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "supplier_id", null: false
+    t.bigint "supplier_id"
     t.string "status"
     t.integer "total_cents"
     t.string "total_currency"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
   end
 
   create_table "part_stocks", force: :cascade do |t|
-    t.bigint "stock_location_id", null: false
+    t.bigint "stock_location_id"
     t.bigint "part_id", null: false
     t.integer "quantity_on_hand"
     t.text "notes"
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
 
   create_table "part_usages", force: :cascade do |t|
     t.bigint "part_id", null: false
-    t.bigint "project_id", null: false
-    t.bigint "project_part_id", null: false
+    t.bigint "project_id"
+    t.bigint "project_part_id"
     t.integer "quantity_used"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
     t.string "name"
     t.text "description"
     t.string "part_number"
-    t.bigint "package_id", null: false
+    t.bigint "package_id"
     t.decimal "value"
     t.string "value_unit"
     t.integer "quantity_ordered"
@@ -136,7 +136,9 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
     t.integer "quantity_used"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "part_type_id", null: false
     t.index ["package_id"], name: "index_parts_on_package_id"
+    t.index ["part_type_id"], name: "index_parts_on_part_type_id"
   end
 
   create_table "project_parts", force: :cascade do |t|
@@ -183,7 +185,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
   create_table "supplier_parts", force: :cascade do |t|
     t.bigint "supplier_id", null: false
     t.bigint "part_id", null: false
-    t.bigint "manufacturer_part_id", null: false
+    t.bigint "manufacturer_part_id"
     t.string "part_number"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
@@ -215,6 +217,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_012715) do
   add_foreign_key "part_usages", "project_parts"
   add_foreign_key "part_usages", "projects"
   add_foreign_key "parts", "packages"
+  add_foreign_key "parts", "part_types"
   add_foreign_key "project_parts", "parts"
   add_foreign_key "project_parts", "projects"
   add_foreign_key "property_types", "part_types"

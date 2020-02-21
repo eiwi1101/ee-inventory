@@ -14,6 +14,14 @@ module Types
     field :value_unit, String, null: true
     field :value_unit_name, String, null: true
 
-    field :package, Types::PackageType, null: false
+    field :category, Types::CategoryType, null: false
+    field :part_type, Types::PartTypeType, null: false
+    field :package, Types::PackageType, null: true
+    field :supplier_parts, [Types::SupplierPartType], null: true
+    field :manufacturer_parts, [Types::ManufacturerPartType], null: false
+    field :suppliers, [Types::SupplierType], null: true
+    field :manufacturers, [Types::ManufacturerType], null: true
+    field :stock_locations, [Types::StockLocationType], null: true
+    field :part_stocks, [Types::PartStockType], null: true
   end
 end

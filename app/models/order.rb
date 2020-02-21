@@ -9,7 +9,7 @@
 #  total_currency :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  supplier_id    :bigint           not null
+#  supplier_id    :bigint
 #
 # Indexes
 #
@@ -21,5 +21,5 @@
 #
 
 class Order < ApplicationRecord
-  belongs_to :supplier
+  belongs_to :supplier, optional: true
 end

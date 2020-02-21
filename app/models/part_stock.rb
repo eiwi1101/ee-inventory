@@ -8,7 +8,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  part_id           :bigint           not null
-#  stock_location_id :bigint           not null
+#  stock_location_id :bigint
 #
 # Indexes
 #

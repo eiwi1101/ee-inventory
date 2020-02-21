@@ -8,8 +8,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  part_id         :bigint           not null
-#  project_id      :bigint           not null
-#  project_part_id :bigint           not null
+#  project_id      :bigint
+#  project_part_id :bigint
 #
 # Indexes
 #
@@ -26,6 +26,6 @@
 
 class PartUsage < ApplicationRecord
   belongs_to :part
-  belongs_to :project
-  belongs_to :project_part
+  belongs_to :project, optional: true
+  belongs_to :project_part, optional: true
 end

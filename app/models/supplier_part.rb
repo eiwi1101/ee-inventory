@@ -7,7 +7,7 @@
 #  part_number          :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  manufacturer_part_id :bigint           not null
+#  manufacturer_part_id :bigint
 #  part_id              :bigint           not null
 #  supplier_id          :bigint           not null
 #
@@ -27,5 +27,5 @@
 class SupplierPart < ApplicationRecord
   belongs_to :supplier
   belongs_to :part
-  belongs_to :manufacturer_part
+  belongs_to :manufacturer_part, optional: true
 end

@@ -12,6 +12,19 @@ type Category {
     partTypes: [PartType!]!
 }
 
+type Manufacturer {
+    id: Int!
+    name: String!
+    website: String
+}
+
+type ManufacturerPart {
+    id: Int!
+    manufacturer: Manufacturer!
+    part: Part!
+    partNumber: String
+}
+
 type Mutation {
     "An example field added by the generator"
     testField: String!
@@ -31,15 +44,21 @@ type Package {
 
 "An individual part"
 type Part {
+    category: Category!
     description: String
     id: Int!
+    manufacturerParts: [ManufacturerPart!]!
+    manufacturers: [Manufacturer!]
     name: String!
-    package: Package!
+    package: Package
     partNumber: String
+    partType: PartType!
     quantityOnHand: Int
     quantityOnOrder: Int
     quantityOrdered: Int
     quantityUsed: Int
+    supplierParts: [SupplierPart!]
+    suppliers: [Supplier!]
     value: Int
     valueUnit: String
     valueUnitName: String
@@ -58,4 +77,19 @@ type Query {
     getCategory(id: Int!): Category
     getPart(id: Int!): Part
     getParts(categoryId: Int): [Part!]
+}
+
+type Supplier {
+    id: Int!
+    name: String!
+    notes: String!
+    website: String
+}
+
+type SupplierPart {
+    id: Int!
+    manufacturerPart: ManufacturerPart
+    notes: String
+    part: Part!
+    partNumber: String
 }
