@@ -29,8 +29,6 @@ module Types
       Part.find_by(id: id)
     end
 
-    private
-
     def get_categories
       Category.all
     end

@@ -3,19 +3,23 @@
 // of the page.
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import client from "../services/apollo"
+import { ApolloProvider } from '@apollo/react-hooks'
+
+import Categories from './Categories'
+import Layout from "./Layout"
+import { BrowserRouter as Router,
+  Switch,
+  Route } from 'react-router-dom'
 
 const App = props => (
-  <div>Hello {props.name}!</div>
+  <ApolloProvider client={client}>
+    <Router>
+      <Layout>
+      </Layout>
+    </Router>
+  </ApolloProvider>
 )
-
-App.defaultProps = {
-  name: 'David'
-}
-
-App.propTypes = {
-  name: PropTypes.string
-}
 
 export default App
