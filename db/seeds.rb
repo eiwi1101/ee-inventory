@@ -21,14 +21,24 @@ import.each do |r|
   part_type.update!(category: category)
 
   package = if (footprint = r['Footprint'])
+              footprint = '0806' if footprint == 806
               Package.find_or_create_by!(name: footprint)
             end
+
+  value = nil
+  value_unit = nil
+  if r['Value'] =~ /(\d+)([kum][bf]?)/i
+    value = Regexp.last_match(1).to_i
+    value_unit = Regexp.last_match(2)
+  end
 
   part = Part.create!(
     name: r['Component'],
     package: package,
     part_type: part_type,
     part_number: r['P/N'],
+    value: value,
+    value_unit: value_unit,
     description: r['Value']
   )
 
