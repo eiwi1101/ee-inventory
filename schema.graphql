@@ -5,12 +5,57 @@ schema {
     mutation: Mutation
 }
 
+"Parts category"
+type Category {
+    id: Int!
+    name: String!
+    partTypes: [PartType!]!
+}
+
 type Mutation {
     "An example field added by the generator"
     testField: String!
 }
 
+"A part package or footprint"
+type Package {
+    description: String
+    dimensionUnit: String
+    height: Int
+    id: Int!
+    length: Int
+    name: String!
+    surfaceMount: Boolean
+    width: Int
+}
+
+"An individual part"
+type Part {
+    description: String
+    id: Int!
+    name: String!
+    package: Package!
+    partNumber: String
+    quantityOnHand: Int
+    quantityOnOrder: Int
+    quantityOrdered: Int
+    quantityUsed: Int
+    value: Int
+    valueUnit: String
+    valueUnitName: String
+}
+
+"A type of a part"
+type PartType {
+    category: Category!
+    description: String
+    id: Int!
+    name: String!
+}
+
 type Query {
-    "An example field added by the generator"
-    testField: String!
+    getCategories: [Category!]
+    getCategory(id: Int!): Category
+    getPart(id: Int!): Part
+    getParts(categoryId: Int): [Part!]
 }

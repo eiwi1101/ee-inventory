@@ -27,6 +27,9 @@
 
 class Part < ApplicationRecord
   belongs_to :package
+  belongs_to :part_type
+
+  has_one :category, through: :part_type
 
   validates_presence_of :name
 end

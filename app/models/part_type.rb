@@ -20,4 +20,5 @@
 
 class PartType < ApplicationRecord
   belongs_to :category
+  has_many :parts
 end

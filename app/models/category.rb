@@ -10,5 +10,7 @@
 #
 
 class Category < ApplicationRecord
+  has_many :part_types
+
   validates_presence_of :name
 end
