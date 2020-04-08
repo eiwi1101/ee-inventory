@@ -5,18 +5,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import client from "../services/apollo"
-import { ApolloProvider } from '@apollo/react-hooks'
+import {ApolloProvider} from '@apollo/react-hooks'
 
-import Categories from './Categories'
 import Layout from "./Layout"
-import { BrowserRouter as Router,
+import {
+  BrowserRouter as Router,
   Switch,
-  Route } from 'react-router-dom'
+  Route
+} from 'react-router-dom'
+import Category from "./Views/Category"
 
 const App = props => (
   <ApolloProvider client={client}>
     <Router>
       <Layout>
+        <Switch>
+          <Route path={'/categories/:slug'}>
+            <Category />
+          </Route>
+        </Switch>
       </Layout>
     </Router>
   </ApolloProvider>

@@ -11,6 +11,7 @@
 
 class Category < ApplicationRecord
   has_many :part_types
+  has_many :parts, through: :part_types
 
   validates_presence_of :name
 end

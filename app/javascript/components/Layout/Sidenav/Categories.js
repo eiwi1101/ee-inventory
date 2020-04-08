@@ -1,23 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {useQuery} from "@apollo/react-hooks"
 import { gql } from 'apollo-boost'
-import ListItemIcon from "@material-ui/core/ListItemIcon"
-import InboxIcon from "@material-ui/icons/MoveToInbox"
-import MailIcon from "@material-ui/icons/Mail"
 import ListItemText from "@material-ui/core/ListItemText"
-import ListItem from "@material-ui/core/ListItem"
 import List from "@material-ui/core/List"
 import {makeStyles} from "@material-ui/core/styles"
+import ListItemLink from "./ListItemLink"
 
 const getCategories = gql`
 query getCategories {
     getCategories {
         id
         name
-        partTypes {
-            id
-            name
-        }
     }
 }
 `
@@ -36,12 +29,16 @@ export default function Categories() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
+  const categories = data.getCategories;
+
+  categories.map(c => {
+    c.slug = (c.name || "").toLowerCase().replace(/[^a-z]/g, '-').replace(/-+/g, '-');
+  })
+
   return (
     <List dense>
-      { data.getCategories.map((category) => (
-        <ListItem button key={category.id} className={styles.nested}>
-          <ListItemText primary={category.name} />
-        </ListItem>
+      { categories.map((category) => (
+        <ListItemLink key={category.id} className={styles.nested} primary={category.name} to={'/categories/' + category.id + '-' + category.slug} />
       )) }
     </List>
   )
